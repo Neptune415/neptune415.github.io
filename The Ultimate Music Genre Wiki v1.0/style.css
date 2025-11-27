@@ -480,7 +480,7 @@
 .ck-content blockquote {
     overflow: hidden;
     padding-right: 1.5em;
-    padding-left: 0em;
+    padding-left: 0;
     margin-left: 0;
     margin-right: 0;
     font-style: italic;
