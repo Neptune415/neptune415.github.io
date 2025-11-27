@@ -280,6 +280,12 @@
 .ck-editor__editable.ck-content .todo-list .todo-list__label.todo-list__label_without-description input[type=checkbox] {
     position: absolute;
 }
+/* 给所有列表添加上下外边距，给嵌套列表添加左内边距 */
+.ck-content ol,
+.ck-content ul {
+    margin: 0.5em 0; /* 与其他内容区分 */
+    padding-left: 1.5em; /* 避免列表项紧贴左侧，提升可读性 */
+}
 /* @ckeditor/ckeditor5-list/theme/list.css */
 .ck-content ol {
     list-style-type: decimal;
