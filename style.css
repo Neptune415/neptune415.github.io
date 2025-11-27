@@ -192,3 +192,8 @@ footer {
 .music-btn:hover {
   background: #8f5ee0;
 }
+
+li {
+  position: relative;
+  left: -20px;  /* 整体左移 20px */
+}
