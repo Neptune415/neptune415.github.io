@@ -6114,46 +6114,37 @@
 
     // 递归处理所有目录项（支持无限层级）
     function processNavItems(parentElement) {
-      // 获取当前层级的所有 <li> 项
-      const items = parentElement.querySelectorAll('> li');
+    // 修复：先获取所有子节点，再筛选出直接子级的 <li>（兼容所有浏览器）
+    const items = Array.from(parentElement.children).filter(child => child.tagName === 'LI');
 
-      items
-.forEach(item => {
-        // 给每个目录项添加统一类名
+    items
+    .forEach(item => {
         item
-.classList.add('nav-item');
+    .classList.add('nav-item');
 
-        // 查找当前项是否有子目录（直接子级的ul）
-        const childUl = item.querySelector('> ul');
-        const linkElement = item.querySelector('> a'); // 当前项的链接
+        // 修复：获取当前项的直接子级 <ul>（不用 querySelector，避免语法问题）
+        const childUl = Array.from(item.children).find(child => child.tagName === 'UL');
+        const linkElement = item.querySelector('> a'); // 这行不变
 
-        // 如果有子目录（是父项）
         if (childUl) {
-          item
-.classList.add('has-children');
-          // 给子目录添加统一类名
-          childUl
-.classList.add('nav-children');
+        item
+    .classList.add('has-children');
+        childUl
+    .classList.add('nav-children');
 
-          // 如果当前项有链接（<a>标签），修改为点击不跳转，只控制折叠
-          if (linkElement) {
-            // 给链接添加统一类名
+        if (linkElement) {
             linkElement
-.classList.add('nav-link');
-            // 给链接添加折叠图标
+    .classList.add('nav-link');
             linkElement
-.insertAdjacentHTML('afterbegin', '<span class="toggle-icon">▶</span>');
-            // 绑定点击事件（控制折叠/展开）
+    .insertAdjacentHTML('afterbegin', '<span class="toggle-icon">▶</span>');
             linkElement
-.addEventListener('click', function(e) {
-              // 阻止链接跳转（如果href不是#，但父项点击只折叠，不跳转）
-              e
-.preventDefault();
-              // 切换展开/折叠状态
-              item
-.classList.toggle('expanded');
+    .addEventListener('click', function(e) {
+            e
+    .preventDefault();
+            item
+    .classList.toggle('expanded');
             });
-          }
+        }
 
           // 递归处理子目录（支持多级嵌套）
           processNavItems(childUl);
