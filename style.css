@@ -193,11 +193,8 @@ footer {
   background: #8f5ee0;
 }
 
-ul {
-  padding-left: 10px;   /* 整体靠左 */
-}
-
-ul li {
-  margin-left: 0;       /* 去掉 li 自带 margin */
+li {
+  width: 400px;      /* 设置你想要的宽度 */
+  box-sizing: border-box;  /* 保证 padding 不影响总宽度 */
 }
 
