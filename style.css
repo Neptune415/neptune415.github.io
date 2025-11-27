@@ -193,7 +193,11 @@ footer {
   background: #8f5ee0;
 }
 
-li {
-  position: relative;
-  left: -40px;  /* 整体左移 20px */
+ul {
+  padding-left: 10px;   /* 整体靠左 */
 }
+
+ul li {
+  margin-left: 0;       /* 去掉 li 自带 margin */
+}
+
