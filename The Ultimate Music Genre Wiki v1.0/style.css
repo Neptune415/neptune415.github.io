@@ -304,18 +304,32 @@
 /* @ckeditor/ckeditor5-list/theme/list.css */
 .ck-content ul {
     list-style-type: disc;
+    padding-left: 20px;
 }
 /* @ckeditor/ckeditor5-list/theme/list.css */
 .ck-content ul ul {
     list-style-type: circle;
+    padding-left: 15px;
 }
 /* @ckeditor/ckeditor5-list/theme/list.css */
 .ck-content ul ul ul {
     list-style-type: square;
+    padding-left: 15px;
 }
 /* @ckeditor/ckeditor5-list/theme/list.css */
 .ck-content ul ul ul ul {
     list-style-type: square;
+    padding-left: 15px;
+}
+/* @ckeditor/ckeditor5-list/theme/list.css */
+.ck-content ul ul ul ul ul{
+    list-style-type: square;
+    padding-left: 15px;
+}
+/* @ckeditor/ckeditor5-list/theme/list.css */
+.ck-content ul ul ul ul ul ul{
+    list-style-type: square;
+    padding-left: 15px;
 }
 /* @ckeditor/ckeditor5-image/theme/image.css */
 .ck-content .image {
