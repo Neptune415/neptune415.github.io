@@ -6,7 +6,7 @@
 </head>
 
 <body class="ck-content">
-    <ul>
+    <ul class="foldable-list">
         <li><a href="The%20Ultimate%20Music%20Genre%20Wiki.html" target="detail">The Ultimate Music Genre Wiki</a>
             <ul>
                 <li><a href="The%20Ultimate%20Music%20Genre%20Wiki/Jazz.html" target="detail">Jazz</a>
@@ -6054,6 +6054,134 @@
             </ul>
         </li>
     </ul>
+    <style>
+  /* 折叠功能核心CSS（自动生效，无需手动改） */
+  /* 图标样式 */
+  .toggle-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  /* 无子女目录隐藏图标占位 */
+  .nav-item:not(.has-children) .toggle-icon {
+    visibility: hidden;
+  }
+  /* 展开时图标旋转 */
+  .nav-item.expanded .toggle-icon {
+    transform: rotate(90deg);
+  }
+  /* 子目录折叠/展开样式 */
+  .nav-children {
+    list-style: none;
+    padding-left: 24px;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-item.expanded .nav-children {
+    max-height: 2000px; /* 足够容纳多级子目录 */
+  }
+  /* 父项点击区域样式（避免链接跳转冲突） */
+  .nav-link {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+  }
+
+</style>
+<script>
+  // 等待页面加载完成
+  document.addEventListener('DOMContentLoaded', function() {
+    // -------------------------- 关键配置：修改这里为你原有目录的外层选择器 --------------------------
+    // 比如你的目录外层是 <ul class="sidebar-nav">，就改成 '.sidebar-nav'
+    // 比如是 <ul id="menu">，就改成 '#menu'
+    const ORIGINAL_NAV_SELECTOR = '.foldable-list'; // 🔴 必须修改为你自己的目录选择器！
+    // -------------------------------------------------------------------------------------------
+
+    // 获取你原有的目录元素
+    const originalNav = document.querySelector(ORIGINAL_NAV_SELECTOR);
+    if (!originalNav) {
+      console.error('未找到目录！请检查 ORIGINAL_NAV_SELECTOR 配置是否正确');
+      return;
+    }
+
+    // 递归处理所有目录项（支持无限层级）
+    function processNavItems(parentElement) {
+      // 获取当前层级的所有 <li> 项
+      const items = parentElement.querySelectorAll('> li');
+
+      items
+.forEach(item => {
+        // 给每个目录项添加统一类名
+        item
+.classList.add('nav-item');
+
+        // 查找当前项是否有子目录（直接子级的ul）
+        const childUl = item.querySelector('> ul');
+        const linkElement = item.querySelector('> a'); // 当前项的链接
+
+        // 如果有子目录（是父项）
+        if (childUl) {
+          item
+.classList.add('has-children');
+          // 给子目录添加统一类名
+          childUl
+.classList.add('nav-children');
+
+          // 如果当前项有链接（<a>标签），修改为点击不跳转，只控制折叠
+          if (linkElement) {
+            // 给链接添加统一类名
+            linkElement
+.classList.add('nav-link');
+            // 给链接添加折叠图标
+            linkElement
+.insertAdjacentHTML('afterbegin', '<span class="toggle-icon">▶</span>');
+            // 绑定点击事件（控制折叠/展开）
+            linkElement
+.addEventListener('click', function(e) {
+              // 阻止链接跳转（如果href不是#，但父项点击只折叠，不跳转）
+              e
+.preventDefault();
+              // 切换展开/折叠状态
+              item
+.classList.toggle('expanded');
+            });
+          }
+
+          // 递归处理子目录（支持多级嵌套）
+          processNavItems(childUl);
+        } else {
+          // 没有子目录（纯子项）
+          if (linkElement) {
+            // 给纯子项添加图标占位（保持对齐）
+            linkElement
+.classList.add('nav-link');
+            linkElement
+.insertAdjacentHTML('afterbegin', '<span class="toggle-icon">▶</span>');
+            // 纯子项点击正常跳转，不添加折叠事件
+          }
+        }
+      });
+    }
+
+    // 开始批量处理目录
+    processNavItems(originalNav);
+
+    // 可选：默认展开第一个父目录（不需要可删除）
+    const firstParent = document.querySelector('.nav-item.has-children');
+    if (firstParent) {
+      firstParent
+.classList.add('expanded');
+    }
+  });
+</script>
 </body>
 
 </html>
