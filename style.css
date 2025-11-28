@@ -1,77 +1,177 @@
 /* ==== 基础 ==== */
+:root {
+    --primary-color: #a970ff;
+    --dark-bg: #0f0f1e;
+    --card-bg: #1a1a2e;
+    --text-light: #e0e0e0;
+    --accent-purple: #8f5ee0;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: "Verdana", "Arial", sans-serif;
-    background: #f7f4f1; /* itch.io 常用淡米色背景 */
-    color: #333;
+    font-family: "Segoe UI", "Verdana", "Arial", sans-serif;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: #e0e0e0;
     line-height: 1.7;
+    min-height: 100vh;
 }
 
 /* ==== 导航栏 ==== */
-.navbar {
-    background: #fa5c5c;  /* itch.io 主色 红橘 */
-    padding: 15px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 4px solid #00000030;
+.navbar-custom {
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #a970ff;
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(169, 112, 255, 0.1);
 }
 
-.navbar .logo {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.4rem;
+.navbar-custom .navbar-brand {
+    font-size: 1.6rem;
+    color: #a970ff !important;
+    transition: all 0.3s ease;
 }
 
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-.navbar ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 6px 10px;
-    border-radius: 6px;
-}
-
-.navbar ul li a:hover,
-.navbar ul li a.active {
-    background: #00000025;
+.navbar-custom .navbar-brand:hover {
+    text-shadow: 0 0 10px #a970ff;
+    transform: scale(1.05);
 }
 
 /* ==== Hero 区域 ==== */
-.hero {
-    background: white;
-    margin: 40px auto;
-    max-width: 900px;
-    padding: 50px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 0 #00000020;
+.hero-section {
+    min-height: 60vh;
+    background: linear-gradient(135deg, rgba(169, 112, 255, 0.1) 0%, rgba(139, 94, 224, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
 }
 
-.hero h1 {
-    margin-top: 0;
-    font-size: 2.4rem;
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(169, 112, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -100px;
+    right: -100px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(139, 94, 224, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: -50px;
+    left: -80px;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a970ff, #8f5ee0, #a970ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: #a970ff;
+    margin-top: 1rem;
 }
 
 /* ==== 内容区 ==== */
 .content {
     max-width: 900px;
-    background: white;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
     margin: 40px auto;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 0 #00000020;
+    border-radius: 15px;
+    border: 1px solid rgba(169, 112, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(169, 112, 255, 0.1);
 }
 
 .content h1 {
     margin-top: 0;
     font-size: 2.2rem;
+    color: #a970ff;
+}
+
+/* ==== 音乐展示区 ==== */
+.music-showcase {
+    padding: 80px 0;
+    position: relative;
+}
+
+.music-content h2 {
+    font-size: 2.8rem;
+    color: #a970ff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.music-content .lead {
+    color: #8f5ee0;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.music-content p {
+    color: #b0b0d0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.music-features {
+    background: rgba(169, 112, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #a970ff;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #c0c0d0;
+}
+
+.feature-icon {
+    font-size: 1.8rem;
+}
+
+/* ==== 音乐卡片 ==== */
+.music-card {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-card-inner {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.music-card-inner svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 20px rgba(169, 112, 255, 0.3));
 }
 
 /* ==== 博客列表 ==== */
@@ -85,20 +185,55 @@ body {
 
 .blog-list a {
     text-decoration: none;
-    color: #fa5c5c;
+    color: #a970ff;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .blog-list a:hover {
+    color: #8f5ee0;
     text-decoration: underline;
+    text-shadow: 0 0 8px #a970ff;
+}
+
+/* ==== 呼吁行动区域 ==== */
+.cta-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    color: #a970ff;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.btn-music {
+    background: linear-gradient(135deg, #a970ff, #8f5ee0);
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(169, 112, 255, 0.3);
+}
+
+.btn-music:hover {
+    background: linear-gradient(135deg, #8f5ee0, #a970ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(169, 112, 255, 0.4);
 }
 
 /* ==== Footer ==== */
-footer {
-    margin-top: 60px;
-    padding: 20px;
-    text-align: center;
-    color: #555;
+.footer-custom {
+    border-top: 2px solid #a970ff;
+    padding: 40px 0;
+    color: #808090;
+    background: rgba(26, 26, 46, 0.5);
 }
 /* =====================
    itch.io 游戏页面样式
@@ -108,10 +243,12 @@ footer {
 .game-hero {
     max-width: 900px;
     margin: 40px auto;
-    background: white;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 0 #00000020;
+    border: 1px solid rgba(169, 112, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(169, 112, 255, 0.1);
     text-align: center;
 }
 
@@ -124,35 +261,41 @@ footer {
 .game-title {
     font-size: 2.4rem;
     margin: 10px 0;
+    color: #a970ff;
 }
 
 .game-author {
     margin-bottom: 20px;
-    color: #555;
+    color: #8f5ee0;
     font-size: 1.1rem;
 }
 
-/* itch.io 大红按钮 */
 .big-button {
     display: inline-block;
-    background: #fa5c5c;
+    background: linear-gradient(135deg, #a970ff, #8f5ee0);
     padding: 15px 35px;
     margin-top: 10px;
-    border-radius: 10px;
+    border-radius: 50px;
     color: white;
     font-weight: bold;
     text-decoration: none;
     font-size: 1.2rem;
-    border-bottom: 4px solid #c44141;
+    border: none;
+    box-shadow: 0 8px 25px rgba(169, 112, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
 .big-button:hover {
-    background: #ff7676;
+    background: linear-gradient(135deg, #8f5ee0, #a970ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(169, 112, 255, 0.4);
 }
 
 /* 内容区域 */
 .game-section h2 {
     margin-top: 0;
+    color: #a970ff;
 }
 
 /* 截图网格 */
@@ -166,30 +309,121 @@ footer {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 3px 0 #00000015;
-}
-.music-section {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 12px;
-  margin: 20px 0;
+    transition: transform 0.3s ease;
 }
 
-.music-section h2 {
-  color: #a970ff;
-  margin-bottom: 10px;
+.screenshot-grid img:hover {
+    transform: scale(1.05);
 }
 
-.music-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 16px;
-  background: #a970ff;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
+/* ==== 动画效果 ==== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.music-btn:hover {
-  background: #8f5ee0;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(169, 112, 255, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(169, 112, 255, 0.5);
+        transform: scale(1.02);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+.pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite !important;
 }
 
